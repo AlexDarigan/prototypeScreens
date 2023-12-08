@@ -130,7 +130,7 @@ fun SignUpScreen() {
                 .fillMaxWidth()
                 .height(50.dp)
         ) {
-            Text("Sign Up")
+            Text("Register")
         }
         Spacer(modifier = Modifier.weight(1f))
     }

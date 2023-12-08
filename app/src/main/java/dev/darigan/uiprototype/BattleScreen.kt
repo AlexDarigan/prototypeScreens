@@ -1,117 +1,135 @@
-package dev.darigan.uiprototype
-
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
+
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun BattleScreen() {
-    var playerHealth by remember { mutableStateOf(100) }
-    var opponentHealth by remember { mutableStateOf(100) }
-    var message by remember { mutableStateOf("Choose an action") }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Text(
-            text = "Battle!",
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
+        // Opponent Section
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            PlayerCard(
-                name = "BelleStar",
-                health = playerHealth,
-                drawableRes = R.drawable.ic_launcher_foreground,
-                onClick = {}
-            )
+            // Opponent Health Bar
+            HealthBar(health = 70) // Pass opponent's health here
 
-            PlayerCard(
-                name = "annieOakleyr",
-                health = opponentHealth,
-                drawableRes = R.drawable.ic_launcher_foreground,
-                onClick = {}
-            )
+            // Opponent Avatar
+            Avatar()
+
         }
+        Spacer(modifier = Modifier.height(8.dp))
 
-        Divider(color = Color.Gray, modifier = Modifier.padding(vertical = 16.dp))
-
-        Text(
-            text = message,
-            modifier = Modifier.padding(bottom = 16.dp)
+        // Opponent Name
+        BasicText(
+            text = "Opponent Name", // Replace with actual name
+            style = MaterialTheme.typography.titleSmall
         )
 
-        Button(onClick = { /* Perform action */ }) {
-            Text("Fight")
-        }
-    }
-}
+        Spacer(modifier = Modifier.height(24.dp))
 
-@Composable
-fun PlayerCard(name: String, health: Int, drawableRes: Int, onClick: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .width(150.dp)
-            .padding(8.dp)
-    ) {
-        Text(text = name, modifier = Modifier.padding(bottom = 8.dp))
-        Surface(
-            modifier = Modifier
-                .clip(CircleShape)
-                .clickable { onClick.invoke() }
-                .size(120.dp)
-                .background(Color.LightGray),
-            shadowElevation = 4.dp
+        // Player Section
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.Bottom
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-            ) {
-                // Pokemon image
-                Image(
-                    painter = painterResource(id = drawableRes),
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize()
-                )
+            // Player Avatar
+            Avatar()
+
+            // Player Health Bar
+            HealthBar(health = 90) // Pass player's health here
+        }
+
+        // Player Name
+        BasicText(
+            text = "Player Name", // Replace with actual name
+            style = MaterialTheme.typography.titleSmall
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Six Circles Representing Spells
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            repeat(6) {
+                SpellCircle()
             }
         }
-        HealthBar(health)
     }
 }
 
 @Composable
 fun HealthBar(health: Int) {
-    Box(
+    Surface(
         modifier = Modifier
-            .height(16.dp)
             .width(120.dp)
-            .background(Color.Gray)
+            .height(20.dp),
+        color = Color.Gray,
+        shape = RoundedCornerShape(10.dp)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Red)
-                .width((health * 1.2).dp)
+                .background(Color.Green, shape = RoundedCornerShape(10.dp))
         )
     }
 }
 
+@Composable
+fun Avatar() {
+    // Replace with actual avatar image or placeholder
+    Box(
+        modifier = Modifier
+            .size(80.dp)
+            .background(Color.Blue),
+        contentAlignment = Alignment.Center
+    ) {
+        BasicText(
+            text = "Avatar", // Placeholder or image
+            style = MaterialTheme.typography.headlineSmall
+        )
+    }
+}
+
+@Composable
+fun SpellCircle() {
+    Box(
+        modifier = Modifier
+            .size(40.dp)
+            .background(Color.Red, shape = CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "Spell", // Placeholder for spell representation
+            fontSize = 16.sp,
+            color = Color.White
+        )
+    }
+}
+
+
+@Preview()
+@Composable
+fun Game() {
+    BattleScreen()
+}
