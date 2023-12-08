@@ -24,80 +24,92 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun BattleScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        // Opponent Section
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+    Box(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier.fillMaxSize()
         ) {
-            // Opponent Health Bar
-            Column {
-                Text(
-                    text = "Opponent Name", // Replace with actual name
-                    style = MaterialTheme.typography.titleLarge,
-                    color = Color.White
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                HealthBar(health = 70) // Pass opponent's health here
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(
-                    text = "100 / 100", // Replace with actual name
-                    style = MaterialTheme.typography.titleLarge,
-                    color = Color.White
-                )
-            }
-
-            // Opponent Avatar
-            Avatar()
+            Image(
+                painter = painterResource(id = R.drawable.backgroundcolorgrass),
+                contentDescription = null,
+                contentScale = ContentScale.FillHeight
+            )
         }
 
-        Spacer(modifier = Modifier.weight(1f, fill = true))
-        // Player Section
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Bottom
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
-            // Player Avatar
-            Avatar()
+            // Opponent Section
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                // Opponent Health Bar
+                Column {
+                    Text(
+                        text = "Opponent Name", // Replace with actual name
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Color.Black
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    HealthBar(health = 70) // Pass opponent's health here
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = "100 / 100", // Replace with actual name
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Color.Black
+                    )
+                }
 
-            // Player Health Bar
-            Column {
-                Text(
-                    text = "Player Name", // Replace with actual name
-                    style = MaterialTheme.typography.titleLarge,
-                    color = Color.White
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                HealthBar(health = 90)
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(
-                    text = "100 / 100", // Replace with actual name
-                    style = MaterialTheme.typography.titleLarge,
-                    color = Color.White
-                )
+                // Opponent Avatar
+                Avatar()
             }
+
+            Spacer(modifier = Modifier.weight(1f, fill = true))
+            // Player Section
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom
+            ) {
+                // Player Avatar
+                Avatar()
+
+                // Player Health Bar
+                Column {
+                    Text(
+                        text = "Player Name", // Replace with actual name
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Color.White
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    HealthBar(health = 90)
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = "100 / 100", // Replace with actual name
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Color.White
+                    )
+                }
 //            HealthBar(health = 90) // Pass player's health here
-        }
+            }
 
 
-        Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-        // Six Circles Representing Spells
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            SpellCircle()
-            SpellCircle(R.drawable.earthmage_1)
-            SpellCircle(R.drawable.earthmage_2)
-            SpellCircle(R.drawable.earthmage_3)
-            SpellCircle(R.drawable.engineer_1)
-            SpellCircle(R.drawable.firemage_1)
+            // Six Circles Representing Spells
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                SpellCircle()
+                SpellCircle(R.drawable.earthmage_1)
+                SpellCircle(R.drawable.earthmage_2)
+                SpellCircle(R.drawable.earthmage_3)
+                SpellCircle(R.drawable.engineer_1)
+                SpellCircle(R.drawable.firemage_1)
+            }
         }
     }
 }
@@ -124,13 +136,15 @@ fun Avatar() {
     // Replace with actual avatar image or placeholder
     Box(
         modifier = Modifier
+            .padding(16.dp)
+            .clip(CircleShape)
             .size(80.dp)
             .background(Color.Blue),
         contentAlignment = Alignment.Center
     ) {
-        BasicText(
-            text = "Avatar", // Placeholder or image
-            style = MaterialTheme.typography.headlineSmall
+        Image(
+            painterResource(id = R.drawable.ic_launcher_background),
+            contentDescription = null
         )
     }
 }
